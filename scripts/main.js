@@ -5,76 +5,110 @@
 			// Aqui se cargaran todos los ficheros de idioma, aparte de agregarlos al config.js
 			"locEs", "locEn"],
 			function($, cookies , App, Ember, i18n, store){
+				$.cookie.json = true
 				var app_name = config.app_name || "App";
 				var loc = null;
-				//Comprobamos si existe la cookie que nos diga que idioma quiere el usuario
-				if(!$.cookie('loc')){
-					// En caso de no existir la cookie, averiguamos el idioma del navegador del usuario y comprobamos que este en la lista de idiomas soportados
-					if(navigator.language != "en" || navigator.language != "en-UK" || navigator.language != "en-US"){
-						var langList = ['es','es-ES'];
-						var navLanguage = navigator.language;
-						if(langList.contains(navLanguage)){
 
-							loc = loadLoc(navLanguage);
-						}else{
-							//En caso de que el idioma del navegador del usuario no tenga soporte se pone por defecto el Inglés
-							loc = require('locEn');
-						}
-					}
-				} // En caso de existir una cookie de idioma, cargamos el idioma seleccionado por la cookie
-				else{
-					var selectedLoc = $.cookie('loc');
-					loc = loadLoc(selectedLoc);
-				}
-
-
-				/*
-					Funcion que carga el idioma que considere la aplicacion correcto ( basandose en factores como el lenguaje del navegador y los idiomas disponibles ), y escribe una cookie en el navegador
-					con la informacion sobre el lenguaje seleccionado.
-				*/
-				function loadLoc(language){
-					var lang;
-					switch(language){
-						case 'es': 		
-							lang = require('locEs'); 
-							$.cookie('loc', 'es');
-						break;
-
-						case 'es-ES': 	
-							lang = require('locEs');
-							$.cookie('loc', 'es');
-						break;
-
-						case 'en':    		
-							lang = require('locEn');
-							$.cookie('loc', 'en');
-						break;
-
-						case 'en-UK': 	
-							lang = require('locEn');
-							$.cookie('loc', 'en');
-							break;
-						case 'en-US': 
-							lang = require('locEn');
-							$.cookie('loc', 'en');
-							break;
-					}
-					return lang
-				}
-
-
+				var options = loadOptions();
+				loc = loadLoc(options);
+				loadState(options);
 
 
 				App.store = store;
 				Em.I18n.translations = loc;
 
-
+				Ember.LOG_VERSION = false;
 				root[app_name] = App = Ember.Application.create(App);
 		});
 	});
 })(this);
+/*
+	Funcion que carga el idioma que considere la aplicacion correcto ( basandose en factores como el lenguaje del navegador y los idiomas disponibles ), y escribe una cookie en el navegador
+	con la informacion sobre el lenguaje seleccionado.
+*/
+function loadLoc(options){
+	var language;
+	if(options.loc != null){
+		language = options.loc;
+	}else{
+		language = guessLanguage();
+	}
 
+	var lang;
+	switch(language){
+		case 'es': 		
+			loc = require('locEs'); 
+		break;
 
-function prueba(){
-	console.log("si que sale");
+		case 'es-ES': 	
+			loc = require('locEs');
+		break;
+
+		case 'en':    		
+			loc = require('locEn');
+		break;
+
+		case 'en-UK': 	
+			loc = require('locEn');
+			break;
+		case 'en-US': 
+			loc = require('locEn');
+			break;
+	}
+	return loc
 }
+/*
+	Funcion interna de loadLoc que elige el lenguaje que considera correcto
+*/
+function guessLanguage(){
+	var selectedLang;
+
+	var supportedLangs = ['en-US', 'en-UK', 'en', 'es', 'es-ES'];
+
+	var userLang = navigator.language;
+
+	if(supportedLangs.contains(userLang)){
+		selectedLang = userLang;
+	}else{
+		selectedLang = "en";
+	}
+
+	console.debug("lenguaje elegido "+selectedLang);
+	return selectedLang
+}
+
+/*
+	Funcion que carga las opciones almacenadas en la cookie, devuelve un objeto con notacion JSON con las opciones
+*/
+function loadOptions(){
+	var options = $.cookie('options');
+	if(options){
+		console.debug("Se ha cargado la cookie de opciones");
+	}else{
+		options = {
+			isLogged : false,
+			username : null,
+			colorSelected :'red',
+			loc : null
+		}
+		$.cookie('options', options)
+	}
+
+	//console.debug("Options Loaded");
+	//console.debug(options);
+
+	return options
+}
+
+/*
+	Funcion que recupera el estado basandose en las opciones
+*/
+function loadState(options){
+	if(options.isLogged){
+		console.debug("Cambiando a estado: isLogged")
+	}else{
+		console.debug("Cambiando a estado ")
+	}
+}
+
+

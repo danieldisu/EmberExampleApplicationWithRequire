@@ -3,8 +3,7 @@ define(["ember"], function(Ember){
 		needs : ['Localizations'],
 		init : function(){
 			this._super();
-			
-			
+						
 		},
 		changeSelectedLoc : function(loc){
 			var locCont = this.get("controllers.Localizations");
