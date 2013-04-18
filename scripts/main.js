@@ -18,24 +18,33 @@
 				// To-Do Refactorizar sitios donde estaba STORE
 				App.loginController = LoginController;
 				
-				App.stateManager = Ember.StateManager.create({
+				App.StateManager= Ember.StateManager.extend({
 					isLogged: false,
 					userName: null,
 					colorSelected: 'red',
 					locSelected: 'en',
-					currentState: 'notLoggedin',
 					//Creamos una vista para el estado, para not logged será index
-					notLoggedin: Ember.State.create({
-						init : function(){
-							console.log("estado iniciado")
+					notLoggedIn: Ember.State.create({
+						enter: function(){
+							console.log("Estado : not Logged In ")
 						}
 					}),
-					loggedIn: Ember.State.create({}),
+					loggedIn: Ember.State.create({
+						enter : function(a){
+							console.log("Estado : logged In ")
+							
+						}
+					}),
 					loginSuccess: function(manager){
-						console.log("loginsuccess")
-
+						this.transitionTo("loggedIn")
+						App.Router.router.transitionTo("menu.index")
 					}
 				});
+
+				App.stateManager = App.StateManager.create({
+					initialState : 'notLoggedIn'
+				});
+
 				Em.I18n.translations = loc;
 
 				Ember.LOG_VERSION = false;

@@ -11,7 +11,7 @@ define(["ember"], function(Ember){
 			//Añadir comprobacion de que no esten vacios
 			if(userName == repeatedUserName){
 				console.log('Nombres coinciden');
-				App.stateManager.send('loginSuccess');
+				App.stateManager.loginSuccess();
 			}
 		}
 	 });
