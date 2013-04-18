@@ -6,10 +6,10 @@
 	{{/if}}
 {{/unless}}
 	<div class="inputGroup">
-		{{t index.login.nameLabel tagName="label"}} {{view Ember.TextField valueBinding="App.store.mainUser.name"}}
+		{{t index.login.nameLabel tagName="label"}} {{view Ember.TextField valueBinding="App.loginController.userName"}}
 	</div>
 	<div class="inputGroup">
-		{{t index.login.nameRepeatLabel tagName="label"}} {{view Ember.TextField valueBinding="App.store.mainUser.nameRepeated"}}
+		{{t index.login.nameRepeatLabel tagName="label"}} {{view Ember.TextField valueBinding="App.loginController.repeatedUserName"}}
 	</div>
-	{{#linkTo "menu"}}<button {{bindAttr disabled="App.store.mainUser.isInvalid"}}  class="signInButton"> 
-{{t index.login.loginButton}} </button> {{/linkTo}}
+	<button {{action attemptLogin target="App.loginController"}} class="signInButton"> 
+{{t index.login.loginButton}} </button> 

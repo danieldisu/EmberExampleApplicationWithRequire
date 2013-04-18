@@ -1,10 +1,10 @@
 (function(root){
 	require(["config"], function(config){
 		requirejs.config(config);
-		require(['jquery', 'cookies', "App", "ember", "i18n", "store",
+		require(['jquery', 'cookies', "App", "ember", "i18n","store", "controllers/LoginController",
 			// Aqui se cargaran todos los ficheros de idioma, aparte de agregarlos al config.js
 			"locEs", "locEn"],
-			function($, cookies , App, Ember, i18n, store){
+			function($, cookies , App, Ember, i18n, store , LoginController){
 				$.cookie.json = true
 				var app_name = config.app_name || "App";
 				var loc = null;
@@ -15,7 +15,27 @@
 
 				// To-Do quitar el store de la aplicacion, y refactorizar allá donde se use
 				App.store = store;
+				// To-Do Refactorizar sitios donde estaba STORE
+				App.loginController = LoginController;
+				
+				App.stateManager = Ember.StateManager.create({
+					isLogged: false,
+					userName: null,
+					colorSelected: 'red',
+					locSelected: 'en',
+					currentState: 'notLoggedin',
+					//Creamos una vista para el estado, para not logged será index
+					notLoggedin: Ember.State.create({
+						init : function(){
+							console.log("estado iniciado")
+						}
+					}),
+					loggedIn: Ember.State.create({}),
+					loginSuccess: function(manager){
+						console.log("loginsuccess")
 
+					}
+				});
 				Em.I18n.translations = loc;
 
 				Ember.LOG_VERSION = false;
