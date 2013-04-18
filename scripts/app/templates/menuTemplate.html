@@ -1,0 +1,6 @@
+{{#if App.store.mainUser.name}}
+	{{outlet}}
+{{else}}
+	{{t menu.login.noLog tagName="p"}}
+	{{#linkTo "index"}} {{t menu.login.backToIndex}} {{/linkTo}}
+{{/if}}

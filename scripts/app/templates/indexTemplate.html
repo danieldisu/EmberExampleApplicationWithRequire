@@ -1,0 +1,15 @@
+{{#unless App.store.mainUser.isEmpty}}
+	{{#if App.store.mainUser.isInvalid }}
+		<div class="error">
+			{{t index.login.fail tagName="p"}}
+		</div>
+	{{/if}}
+{{/unless}}
+	<div class="inputGroup">
+		{{t index.login.nameLabel tagName="label"}} {{view Ember.TextField valueBinding="App.store.mainUser.name"}}
+	</div>
+	<div class="inputGroup">
+		{{t index.login.nameRepeatLabel tagName="label"}} {{view Ember.TextField valueBinding="App.store.mainUser.nameRepeated"}}
+	</div>
+	{{#linkTo "menu"}}<button {{bindAttr disabled="App.store.mainUser.isInvalid"}}  class="signInButton"> 
+{{t index.login.loginButton}} </button> {{/linkTo}}

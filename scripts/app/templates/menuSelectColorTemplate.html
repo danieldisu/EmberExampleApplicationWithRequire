@@ -1,0 +1,11 @@
+{{t menu.selectColor.selectColorText tagName="h2"}}
+{{#each controllers.Colors.colors}}		
+	<div {{bindAttr class=":colorBox name"}} {{action changeSelectedColor this}}></div>
+{{/each}}
+
+{{t menu.selectColor.selectedColorText tagName="h2"}}
+
+<div class="seletedColorBox">
+	<div {{bindAttr class=":selectedColor controllers.Color.selectedColor.name"}}></div>
+</div>
+{{#linkTo 'menu'}}<button class="backMenu"> {{t menu.selectColor.selectColorButton}}</button>{{/linkTo}}

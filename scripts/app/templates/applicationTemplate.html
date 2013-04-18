@@ -1,0 +1,11 @@
+<div class="container">
+	{{t main.application.title tagName="h1"}} 
+	<div class="locSelectBox">
+		<ul>
+			{{#each controllers.Localizations.localizationList}}
+				<li  {{bindAttr class=":locItem isSelected:selected"}} {{action "changeSelectedLoc"  this}}><img {{bindAttr src="imgLink"}}>{{name}}</li>
+			{{/each}}
+		</ul>
+	</div>
+	{{outlet}}
+</div>
