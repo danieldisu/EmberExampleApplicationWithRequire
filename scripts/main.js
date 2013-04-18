@@ -13,8 +13,9 @@
 				loc = loadLoc(options);
 				loadState(options);
 
-
+				// To-Do quitar el store de la aplicacion, y refactorizar allá donde se use
 				App.store = store;
+
 				Em.I18n.translations = loc;
 
 				Ember.LOG_VERSION = false;
@@ -85,17 +86,16 @@ function loadOptions(){
 	if(options){
 		console.debug("Se ha cargado la cookie de opciones");
 	}else{
+		// En caso de que no exista la cookie, creamos el objeto options con las opciones por defecto
 		options = {
 			isLogged : false,
 			username : null,
-			colorSelected :'red',
+			colorSelected : 'red',
 			loc : null
 		}
+		// Y guardamos la cookie con las opciones por defecto
 		$.cookie('options', options)
 	}
-
-	//console.debug("Options Loaded");
-	//console.debug(options);
 
 	return options
 }
