@@ -5,6 +5,11 @@
 		</div>
 	{{/if}}
 {{/unless}}
+{{#if App.loginController.hasError}}
+		<div class="error">
+			{{t index.login.fail tagName="p"}}
+		</div>
+{{/if}}
 	<div class="inputGroup">
 		{{t index.login.nameLabel tagName="label"}} {{view Ember.TextField valueBinding="App.loginController.userName"}}
 	</div>
