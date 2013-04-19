@@ -149,6 +149,7 @@ li.locItem{
 	background: #0AB6FF;
 	color: #fff;
 	border: 1px solid #fff;
+	cursor: pointer;
 }
 li.locItem:hover{
 	background: #3DC5FF;
