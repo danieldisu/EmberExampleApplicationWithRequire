@@ -1,10 +1,10 @@
 (function(root){
 	require(["config"], function(config){
 		requirejs.config(config);
-		require(['jquery', 'cookies', "App", "ember", "i18n","store", "controllers/LoginController",
+		require(['jquery', 'cookies', "App", "ember", "i18n","store", "controllers/LoginController", "app/StateManager",
 			// Aqui se cargaran todos los ficheros de idioma, aparte de agregarlos al config.js
 			"locEs", "locEn"],
-			function($, cookies , App, Ember, i18n, store , LoginController){
+			function($, cookies , App, Ember, i18n, store , LoginController, StateManager){
 				$.cookie.json = true
 				var app_name = config.app_name || "App";
 				var loc = null;
@@ -18,30 +18,7 @@
 				// To-Do Refactorizar sitios donde estaba STORE
 				App.loginController = LoginController;
 				
-				App.StateManager= Ember.StateManager.extend({
-					isLogged: false,
-					userName: null,
-					colorSelected: 'red',
-					locSelected: 'en',
-					//Creamos una vista para el estado, para not logged será index
-					notLoggedIn: Ember.State.create({
-						enter: function(){
-							console.log("Estado : not Logged In ")
-						}
-					}),
-					loggedIn: Ember.State.create({
-						enter : function(a){
-							console.log("Estado : logged In ")
-							
-						}
-					}),
-					loginSuccess: function(manager){
-						this.transitionTo("loggedIn")
-						App.Router.router.transitionTo("menu.index")
-					}
-				});
-
-				App.stateManager = App.StateManager.create({
+				App.stateManager = StateManager.create({
 					initialState : 'notLoggedIn'
 				});
 
