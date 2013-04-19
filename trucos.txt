@@ -1,0 +1,9 @@
+- Condicion simple en los templates, usando helpers de handlebars, unless e if:
+
+{{#unless App.store.mainUser.isEmpty}}
+	{{#if App.store.mainUser.isInvalid }}
+		<div class="error">
+			{{t index.login.fail tagName="p"}}
+		</div>
+	{{/if}}
+{{/unless}}

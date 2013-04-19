@@ -1,11 +1,12 @@
 define(function(){
 	loc = {
 		'main.application.title': 'First App with Ember.js',
-		'index.login.fail': 'The names do not match',
+		'index.login.fail.mismatch': 'The names do not match',
+		'index.login.fail.empty': 'Required fields',
 		'index.login.loginButton': 'Sign in',
 		'index.login.nameLabel': 'Type your name: ',
 		'index.login.nameRepeatLabel': 'Re-type your name: ',
-		'menu.login.noLog': 'You have to enter an username.',
+		'menu.login.noLog': 'You have to enter an username',
 		'menu.login.backToIndex': 'Back',
 		'menu.loged.welcomeMsg': 'Welcome',
 		'menu.button.colorListButton': 'Show color list',
