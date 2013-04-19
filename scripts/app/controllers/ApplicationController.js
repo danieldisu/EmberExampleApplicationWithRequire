@@ -2,8 +2,7 @@ define(["ember"], function(Ember){
 	var ApplicationController = Ember.Controller.extend({
 		needs : ['Localizations'],
 		init : function(){
-			this._super();
-						
+			this._super();	
 		},
 		changeSelectedLoc : function(loc){
 			var locCont = this.get("controllers.Localizations");

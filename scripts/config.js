@@ -10,7 +10,8 @@ define({
 		}
 	},
 	paths : {
-		'App': 'app/app',		
+		'App': 'app/app',
+		'StateManager' : 'app/StateManager',
 		'models': 'app/models',
 		'views': 'app/views',
 		'controllers': 'app/controllers',

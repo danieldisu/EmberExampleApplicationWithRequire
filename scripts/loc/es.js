@@ -1,7 +1,8 @@
 define(function(){
 	loc = {	
 		'main.application.title': 'Primera Aplicacion con Ember.js',
-		'index.login.fail': 'Los nombres no coinciden',
+		'index.login.fail.mismatch': 'Los nombres no coinciden',
+		'index.login.fail.empty': 'Completa los campos',
 		'index.login.loginButton': 'Conectar',
 		'index.login.nameLabel': 'Introduce tu nombre: ',
 		'index.login.nameRepeatLabel': 'Repite tu nombre: ',

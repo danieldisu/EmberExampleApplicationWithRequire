@@ -1,20 +1,29 @@
 (function(root){
 	require(["config"], function(config){
 		requirejs.config(config);
-		require(['jquery', 'cookies', "App", "ember", "i18n", "store",
+		require(['jquery', 'cookies', "App", "ember", "i18n","store", "controllers/LoginController", "app/StateManager",
 			// Aqui se cargaran todos los ficheros de idioma, aparte de agregarlos al config.js
 			"locEs", "locEn"],
-			function($, cookies , App, Ember, i18n, store){
+			function($, cookies , App, Ember, i18n, store , LoginController, StateManager){
 				$.cookie.json = true
 				var app_name = config.app_name || "App";
 				var loc = null;
 
 				var options = loadOptions();
-				loc = loadLoc(options);
+				console.log("Cargando " + options.locSelected);
+
+				loc = loadLoc(options.locSelected);
+				
 				loadState(options);
 
 				// To-Do quitar el store de la aplicacion, y refactorizar allá donde se use
 				App.store = store;
+				// To-Do Refactorizar sitios donde estaba STORE
+				App.loginController = LoginController;
+				
+				App.stateManager = StateManager.create({
+					initialState : 'notLoggedIn'
+				});					
 
 				Em.I18n.translations = loc;
 
@@ -27,10 +36,10 @@
 	Funcion que carga el idioma que considere la aplicacion correcto ( basandose en factores como el lenguaje del navegador y los idiomas disponibles ), y escribe una cookie en el navegador
 	con la informacion sobre el lenguaje seleccionado.
 */
-function loadLoc(options){
+function loadLoc(locSelected){
 	var language;
-	if(options.loc != null){
-		language = options.loc;
+	if(locSelected != null){
+		language = locSelected;
 	}else{
 		language = guessLanguage();
 	}

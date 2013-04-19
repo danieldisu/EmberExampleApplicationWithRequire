@@ -3,10 +3,8 @@ define(["require","ember", "jquery", "cookies",  "models/Localization"], functio
 
 	var LocalizationsController = Ember.ArrayController.extend({
 		localizationList: [],
-		selectedLoc : '',
 		init : function (){
 			this._super();
-			this.set("selectedLoc", $.cookie('loc'));
 
 			/* Localization list supported by the App */
 			var es = Localization.create({
@@ -23,7 +21,10 @@ define(["require","ember", "jquery", "cookies",  "models/Localization"], functio
 				isSelected : false
 			})
 
-			if(this.get("selectedLoc") == 'es'){
+			/*
+				Este if sirve para cargar una clase u otra para estilar el lenguaje seleccionado
+			*/
+			if( App.stateManager.locSelected == 'es' ){
 				es.isSelected = true;
 			}else{
 				en.isSelected = true;
@@ -34,8 +35,12 @@ define(["require","ember", "jquery", "cookies",  "models/Localization"], functio
 
 		},
 		changeSelectedLoc : function(loc){
-			$.cookie('loc', loc.value)
-			location.reload();
+			if(loc.value != App.stateManager.locSelected){
+				App.stateManager.set("locSelected", loc.value);
+				App.stateManager.saveState();
+				location.reload();
+			}
+
 		}
 	});
 	return LocalizationsController;
