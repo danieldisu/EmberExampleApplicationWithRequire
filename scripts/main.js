@@ -1,24 +1,21 @@
 (function(root){
 	require(["config"], function(config){
 		requirejs.config(config);
-		require(['jquery', 'cookies', "App", "ember", "i18n","store", "controllers/LoginController", "app/StateManager",
+		require(['jquery', 'cookies', "App", "ember", "i18n", "controllers/LoginController", "app/StateManager",
 			// Aqui se cargaran todos los ficheros de idioma, aparte de agregarlos al config.js
 			"locEs", "locEn"],
-			function($, cookies , App, Ember, i18n, store , LoginController, StateManager){
+			function($, cookies , App, Ember, i18n, LoginController, StateManager){
 				$.cookie.json = true
 				var app_name = config.app_name || "App";
 				var loc = null;
 
 				var options = loadOptions();
-				
+
 				loc = loadLoc(options);
 
 				//Actualizamos la cookie con el idioma que ha elegido la aplicacion
 				$.cookie('options', options);
 
-				// To-Do quitar el store de la aplicacion, y refactorizar allá donde se use
-				App.store = store;
-				// To-Do Refactorizar sitios donde estaba STORE
 				App.loginController = LoginController;
 				
 				App.stateManager = StateManager.create({

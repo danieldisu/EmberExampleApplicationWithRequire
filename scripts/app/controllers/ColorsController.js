@@ -11,7 +11,6 @@ define(["require","ember", "models/Color"], function(require, Ember){
 			this.colors.push(color1)
 			this.colors.push(color2)
 			this.colors.push(color3)
-			App.store.colors = this.colors;
 		},
 		showColors: function(){
 			/* Funcion básica para ver que se a creado el array de colores */

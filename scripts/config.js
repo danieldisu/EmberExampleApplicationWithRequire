@@ -29,8 +29,7 @@ define({
 		'domReady': 'libs/requirejs-plugins/domReady',
 		/* Ficheros de textos */
 		'locEs': 'loc/es',
-		'locEn': 'loc/en',
-		'store' : 'app/store'
+		'locEn': 'loc/en'
 	},
 	/*hbs plugin options*/
 	hbs: {

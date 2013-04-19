@@ -1,4 +1,4 @@
-define(["require","ember","store"], function(require, Ember, store){
+define(["require","ember"], function(require, Ember){
 	var IndexController = Ember.Controller.extend({
 		init : function(){
 			this._super(); 
