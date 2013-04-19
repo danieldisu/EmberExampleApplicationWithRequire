@@ -1,4 +1,4 @@
-{{#if App.store.mainUser.name}}
+{{#if App.stateManager.isLogged}}
 	{{outlet}}
 {{else}}
 	{{t menu.login.noLog tagName="p"}}

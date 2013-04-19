@@ -10,7 +10,10 @@
 				var loc = null;
 
 				var options = loadOptions();
-				loc = loadLoc(options);
+				console.log("Cargando " + options.locSelected);
+
+				loc = loadLoc(options.locSelected);
+				
 				loadState(options);
 
 				// To-Do quitar el store de la aplicacion, y refactorizar allá donde se use
@@ -20,7 +23,7 @@
 				
 				App.stateManager = StateManager.create({
 					initialState : 'notLoggedIn'
-				});
+				});					
 
 				Em.I18n.translations = loc;
 
@@ -33,10 +36,10 @@
 	Funcion que carga el idioma que considere la aplicacion correcto ( basandose en factores como el lenguaje del navegador y los idiomas disponibles ), y escribe una cookie en el navegador
 	con la informacion sobre el lenguaje seleccionado.
 */
-function loadLoc(options){
+function loadLoc(locSelected){
 	var language;
-	if(options.loc != null){
-		language = options.loc;
+	if(locSelected != null){
+		language = locSelected;
 	}else{
 		language = guessLanguage();
 	}

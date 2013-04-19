@@ -16,8 +16,8 @@ define(["ember"], function(Ember){
 			//Añadir comprobacion de que no esten vacios
 			if(userName != "" || repeatedUserName != ""){
 				if(userName == repeatedUserName){
-					console.log('Nombres coinciden');
-					App.stateManager.loginSuccess();
+					
+					App.stateManager.loginSuccess("vacioManager", userName);
 				}
 				else {
 					this.set('hasError', true);
