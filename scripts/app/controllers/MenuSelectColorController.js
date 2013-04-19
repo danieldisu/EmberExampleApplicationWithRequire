@@ -6,8 +6,8 @@ define(['ember'],function(Ember){
 			this._super();
 		},
 		changeSelectedColor : function(newColor){
-			var colorController = this.get("controllers.Color");
-			colorController.changeSelectedColor(newColor.name);
+			App.stateManager.set("colorSelected", newColor.name);
+			App.stateManager.saveState();
 		}
 	});
 	return MenuSelectColorController;

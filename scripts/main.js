@@ -10,11 +10,11 @@
 				var loc = null;
 
 				var options = loadOptions();
-				console.log("Cargando " + options.locSelected);
-
-				loc = loadLoc(options.locSelected);
 				
-				loadState(options);
+				loc = loadLoc(options);
+
+				//Actualizamos la cookie con el idioma que ha elegido la aplicacion
+				$.cookie('options', options);
 
 				// To-Do quitar el store de la aplicacion, y refactorizar allá donde se use
 				App.store = store;
@@ -22,7 +22,7 @@
 				App.loginController = LoginController;
 				
 				App.stateManager = StateManager.create({
-					initialState : 'notLoggedIn'
+					
 				});					
 
 				Em.I18n.translations = loc;
@@ -36,7 +36,9 @@
 	Funcion que carga el idioma que considere la aplicacion correcto ( basandose en factores como el lenguaje del navegador y los idiomas disponibles ), y escribe una cookie en el navegador
 	con la informacion sobre el lenguaje seleccionado.
 */
-function loadLoc(locSelected){
+function loadLoc(options){
+	var options = options;
+	var locSelected = options.locSelected;
 	var language;
 	if(locSelected != null){
 		language = locSelected;
@@ -46,22 +48,27 @@ function loadLoc(locSelected){
 
 	var lang;
 	switch(language){
-		case 'es': 		
+		case 'es': 
+			options.locSelected = "es";	
 			loc = require('locEs'); 
 		break;
 
-		case 'es-ES': 	
+		case 'es-ES': 
+			options.locSelected = "es";	
 			loc = require('locEs');
 		break;
 
-		case 'en':    		
+		case 'en':
+			options.locSelected = "en";	
 			loc = require('locEn');
 		break;
 
-		case 'en-UK': 	
+		case 'en-UK':
+			options.locSelected = "en";	
 			loc = require('locEn');
 			break;
-		case 'en-US': 
+		case 'en-US':
+			options.locSelected = "en";	
 			loc = require('locEn');
 			break;
 	}
@@ -82,6 +89,7 @@ function guessLanguage(){
 	}else{
 		selectedLang = "en";
 	}
+
 
 	console.debug("lenguaje elegido "+selectedLang);
 	return selectedLang
@@ -108,16 +116,3 @@ function loadOptions(){
 
 	return options
 }
-
-/*
-	Funcion que recupera el estado basandose en las opciones
-*/
-function loadState(options){
-	if(options.isLogged){
-		console.debug("Cambiando a estado: isLogged")
-	}else{
-		console.debug("Cambiando a estado ")
-	}
-}
-
-

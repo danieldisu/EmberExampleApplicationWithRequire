@@ -6,6 +6,6 @@
 {{t menu.selectColor.selectedColorText tagName="h2"}}
 
 <div class="seletedColorBox">
-	<div {{bindAttr class=":selectedColor controllers.Color.selectedColor.name"}}></div>
+	<div {{bindAttr class=":selectedColor App.stateManager.colorSelected"}}></div>
 </div>
 {{#linkTo 'menu'}}<button class="backMenu"> {{t menu.selectColor.selectColorButton}}</button>{{/linkTo}}
