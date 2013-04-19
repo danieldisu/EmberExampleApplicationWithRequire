@@ -10,14 +10,14 @@ define(["require","ember", "jquery", "cookies",  "models/Localization"], functio
 
 			/* Localization list supported by the App */
 			var es = Localization.create({
-				name : 'español',
+				name : 'Español',
 				value : 'es',
 				imgLink : 'img/es.png',
 				isSelected : false
 			});
 
 			var en = Localization.create({
-				name : 'english',
+				name : 'English',
 				value : 'en',
 				imgLink : 'img/en.png',
 				isSelected : false

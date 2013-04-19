@@ -2,5 +2,5 @@
 	{{outlet}}
 {{else}}
 	{{t menu.login.noLog tagName="p"}}
-	{{#linkTo "index"}} {{t menu.login.backToIndex}} {{/linkTo}}
+	{{#linkTo "index"}} <button class="backMenu">{{t menu.login.backToIndex}}</button> {{/linkTo}}
 {{/if}}
